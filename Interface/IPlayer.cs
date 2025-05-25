@@ -5,5 +5,7 @@
         string Name { get; }
 
         void Wave();
+
+        void Blast(int[] location, int distance);
     }
 }
