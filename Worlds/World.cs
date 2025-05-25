@@ -54,15 +54,34 @@ namespace Game.Worlds
             }
         }
 
+        //Obsolete
+        public IEnumerable<IWorldEntity> FindNearbySquare(int distance, int[] currentLocation)
+        {
+            return worldEntities
+                .Where(x => (x.Location[0] >= currentLocation[0] - distance && x.Location[0] <= currentLocation[0] + distance && x.Location[1] >= currentLocation[0] - distance && x.Location[2] <= currentLocation[0] + distance))
+                .ToList();
+        }
+
+        //Obsolete
+        public IEnumerable<T> FindNearbySquare<T>(int distance, int[] currentLocation) where T : IWorldEntity
+        {
+            return worldEntities.OfType<T>()
+                .Where(x => (x.Location[0] >= currentLocation[0] - distance && x.Location[0] <= currentLocation[0] + distance && x.Location[1] >= currentLocation[0] - distance && x.Location[2] <= currentLocation[0] + distance))
+                .ToList();
+        }
+
         public IEnumerable<IWorldEntity> FindNearby(int distance, int[] currentLocation)
         {
-            return worldEntities.Where(x => (x.Location[0] <= currentLocation[0] + distance && x.Location[0] <= currentLocation[1] + distance)).ToList();
+            return worldEntities
+                .Where(x => Math.Sqrt(Math.Pow(x.Location[0] - currentLocation[0], 2) + Math.Pow(x.Location[1] - currentLocation[1], 2)) <= distance)
+                .ToList();
         }
 
         public IEnumerable<T> FindNearby<T>(int distance, int[] currentLocation) where T : IWorldEntity
         {
             return worldEntities.OfType<T>()
-                .Where(x => (x.Location[0] <= currentLocation[0] + distance && x.Location[0] <= currentLocation[1] + distance)).ToList();
+                .Where(x => Math.Sqrt(Math.Pow(x.Location[0] - currentLocation[0], 2) + Math.Pow(x.Location[1] - currentLocation[1], 2)) <= distance)
+                .ToList();
         }
 
         public List<IWorldEntity> GetAllEntities()

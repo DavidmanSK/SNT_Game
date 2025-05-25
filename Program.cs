@@ -16,7 +16,9 @@ namespace Game
             List<IAnimal> animals = new List<IAnimal>();
             List<IPlayer> players = new List<IPlayer>();
 
-            players.Add(new Player(world, "Steve"));
+            Player steve = new (world, "Steve");
+
+            players.Add(steve);
 
             characters.Add(new Character(world, CharacterType.Warrior, true, "Hello!"));
             characters.Add(new Character(world, CharacterType.Mage, false, "Greetings!"));
@@ -34,6 +36,8 @@ namespace Game
             worldEntities.AddRange(animals);
 
             world.CreateWorld(worldEntities);
+
+            steve.Blast(steve.Location, 8);
 
             DateTime time = world.Time;
         }

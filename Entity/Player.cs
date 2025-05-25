@@ -36,7 +36,30 @@ namespace Game.Entity
 
         public void Wave()
         {
-            //do stuff
+            Console.WriteLine("Hey there!");
+        }
+
+        public void Blast(int[] location, int distance)
+        {
+            _world.FindNearby(distance, location)
+                .ToList()
+                .ForEach(entity =>
+                {
+                    if (entity != this)
+                    {
+                        entity.Health -= 1;
+
+                        string entityDisplayName = entity switch
+                        {
+                            IPlayer => ((Player)entity).Name,
+                            IAnimal => ((Animal)entity).AnimalType.ToString(),
+                            ICharacter => ((Character)entity).CharacterType.ToString(),
+                            _ => "Unknown"
+                        };
+
+                        Console.WriteLine($"{entityDisplayName} was hit! Remaining Health: {entity.Health}");
+                    }
+                });
         }
     }
 }
