@@ -1,4 +1,6 @@
-﻿namespace Game.Interface
+﻿using Game.Classes;
+
+namespace Game.Interface
 {
     public interface IPlayer: IWorldEntity
     {
@@ -6,6 +8,6 @@
 
         void Wave();
 
-        void Blast(int[] location, int distance);
+        void Blast(Location location, int distance);
     }
 }

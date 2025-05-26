@@ -1,4 +1,6 @@
-﻿namespace Game.Interface
+﻿using Game.Classes;
+
+namespace Game.Interface
 {
     public interface IWorld
     {
@@ -14,10 +16,10 @@
         DateTime Time { get ; set; }
 
         void CreateWorld(List<IWorldEntity> entities);
-        IEnumerable<IWorldEntity> FindNearby(int distance, int[] currentLocation);
-        IEnumerable<T> FindNearby<T>(int distance, int[] currentLocation) where T : IWorldEntity;
+        IEnumerable<IWorldEntity> FindNearby(int distance, Location currentLocation);
+        IEnumerable<T> FindNearby<T>(int distance, Location currentLocation) where T : IWorldEntity;
 
-        IWorldEntity? GetEntityAt(int[] location);
+        IWorldEntity? GetEntityAt(Location location);
         void AddEntity(IWorldEntity entity);
         void RemoveEntity(IWorldEntity entity);
         List<IWorldEntity> GetAllEntities();
