@@ -1,4 +1,5 @@
-﻿using Game.Enum;
+﻿using Game.Classes;
+using Game.Enum;
 using Game.Interface;
 
 namespace Game.Entity
@@ -11,7 +12,7 @@ namespace Game.Entity
         public bool IsFriendly { get; private set; }
         public AnimalType AnimalType { get; private set; }
         public int Health { get; set; }
-        public int[] Location { get; set; }
+        public Location Location { get; set; }
 
         public Animal(IWorld world, AnimalType animalType, bool isFriendly)
         {
@@ -23,13 +24,12 @@ namespace Game.Entity
 
             Random random = new();
 
-            Location =
-            [
+            Location = new(
                 random.Next(0, _world.Width),
                 random.Next(0, _world.Height)
-            ];
+                );
 
-            information = $"Animal Type: {animalType}, Is Friendly: {isFriendly}, InitialHealth: {Health}, Location: [{Location[0]}, {Location[1]}]";
+            information = $"Animal Type: {animalType}, Is Friendly: {isFriendly}, InitialHealth: {Health}, Location: [{Location.X}, {Location.Y}]";
         }
 
         public void Attack(IWorldEntity target)

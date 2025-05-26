@@ -10,11 +10,11 @@ namespace Game
     {
         public static void Main(string[] args)
         {
-            World world = new World("Minecraft", 100, 100);
+            World world = new ("Minecraft", 100, 100);
 
-            List<ICharacter> characters = new List<ICharacter>();
-            List<IAnimal> animals = new List<IAnimal>();
-            List<IPlayer> players = new List<IPlayer>();
+            List<ICharacter> characters = new();
+            List<IAnimal> animals = new();
+            List<IPlayer> players = new ();
 
             Player steve = new (world, "Steve");
 
@@ -30,14 +30,14 @@ namespace Game
             animals.Add(new Animal(world, AnimalType.Snake, false));
             animals.Add(new Animal(world, AnimalType.Wolf, true));
 
-            List<IWorldEntity> worldEntities = new List<IWorldEntity>();
+            List<IWorldEntity> worldEntities = new();
             worldEntities.AddRange(players);
             worldEntities.AddRange(characters);
             worldEntities.AddRange(animals);
 
             world.CreateWorld(worldEntities);
 
-            steve.Blast(steve.Location, 8);
+            steve.Blast(steve.Location, 80);
 
             DateTime time = world.Time;
         }

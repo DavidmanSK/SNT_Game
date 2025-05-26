@@ -1,4 +1,5 @@
-﻿using Game.Interface;
+﻿using Game.Classes;
+using Game.Interface;
 
 namespace Game.Entity
 {
@@ -8,7 +9,7 @@ namespace Game.Entity
         private string information;
 
         public int Health { get; set; }
-        public int[] Location { get; set; }
+        public Location Location { get; set; }
         public string Name { get; private set; }
 
         public Player(IWorld world, string name)
@@ -20,11 +21,10 @@ namespace Game.Entity
 
             Random random = new();
 
-            Location =
-            [
+            Location = new(
                 random.Next(0, _world.Width),
                 random.Next(0, _world.Height)
-            ];
+                );
 
             information = $"Player Name: {Name}, Initial Health: {Health}";
         }
@@ -39,7 +39,7 @@ namespace Game.Entity
             Console.WriteLine("Hey there!");
         }
 
-        public void Blast(int[] location, int distance)
+        public void Blast(Location location, int distance)
         {
             _world.FindNearby(distance, location)
                 .ToList()
@@ -49,17 +49,20 @@ namespace Game.Entity
                     {
                         entity.Health -= 1;
 
-                        string entityDisplayName = entity switch
-                        {
-                            IPlayer => ((Player)entity).Name,
-                            IAnimal => ((Animal)entity).AnimalType.ToString(),
-                            ICharacter => ((Character)entity).CharacterType.ToString(),
-                            _ => "Unknown"
-                        };
-
-                        Console.WriteLine($"{entityDisplayName} was hit! Remaining Health: {entity.Health}");
+                        Console.WriteLine($"{GetEntityDisplayName(entity)} was hit! Remaining Health: {entity.Health}");
                     }
                 });
+        }
+
+        private string GetEntityDisplayName(IWorldEntity entity)
+        {
+            return entity switch
+            {
+                IPlayer => ((Player)entity).Name,
+                IAnimal => ((Animal)entity).AnimalType.ToString(),
+                ICharacter => ((Character)entity).CharacterType.ToString(),
+                _ => "Unknown"
+            };
         }
     }
 }

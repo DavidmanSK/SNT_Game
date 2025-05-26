@@ -1,4 +1,5 @@
-﻿using Game.Enum;
+﻿using Game.Classes;
+using Game.Enum;
 using Game.Interface;
 
 namespace Game.Entity
@@ -12,7 +13,7 @@ namespace Game.Entity
         public bool IsFriendly { get; private set; }
         public string GreetingPhrase { get; private set; }
         public int Health { get; set; }
-        public int[] Location { get; set; }
+        public Location Location { get; set; }
 
         public Character(IWorld world, CharacterType characterType, bool isFriendly, string greetingPhrase)
         {
@@ -26,11 +27,10 @@ namespace Game.Entity
 
             Random random = new();
 
-            Location =
-            [
+            Location = new(
                 random.Next(0, _world.Width),
                 random.Next(0, _world.Height)
-            ];
+                );
 
         }
 
