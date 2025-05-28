@@ -6,7 +6,6 @@ namespace Game.Entity
 {
     public class Animal : WorldEntity, IAnimal
     {
-        private readonly IWorld _world;
         private string information;
 
         public bool IsFriendly { get; private set; }
@@ -14,7 +13,6 @@ namespace Game.Entity
 
         public Animal(IWorld world, AnimalType animalType, bool isFriendly) : base(world)
         {
-            _world = world;
 
             AnimalType = animalType;
             IsFriendly = isFriendly;

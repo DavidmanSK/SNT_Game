@@ -5,7 +5,7 @@ namespace Game.Entity
 {
     public abstract class WorldEntity : IWorldEntity
     {
-        private readonly IWorld _world;
+        internal readonly IWorld _world;
 
         public int Health { get; set; }
         public Location Location { get; set; }

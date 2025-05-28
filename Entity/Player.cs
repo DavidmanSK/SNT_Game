@@ -5,16 +5,12 @@ namespace Game.Entity
 {
     internal class Player: WorldEntity, IPlayer
     {
-        private readonly IWorld _world;
-
         private string information;
 
         public string Name { get; private set; }
 
         public Player(IWorld world, string name) : base(world)
         {
-            _world = world;
-
             Name = name;
 
             information = $"Player Name: {Name}, Initial Health: {Health}";

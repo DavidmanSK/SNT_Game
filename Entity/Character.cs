@@ -1,12 +1,10 @@
-﻿using Game.Classes;
-using Game.Enum;
+﻿using Game.Enum;
 using Game.Interface;
 
 namespace Game.Entity
 {
     internal class Character : WorldEntity, ICharacter
     {
-        private readonly IWorld _world;
         private string information;
 
         public CharacterType CharacterType { get; private set; }
@@ -15,8 +13,6 @@ namespace Game.Entity
 
         public Character(IWorld world, CharacterType characterType, bool isFriendly, string greetingPhrase) : base(world)
         {
-            _world = world;
-
             information = "This is a character in the game world.";
             CharacterType = characterType;
             IsFriendly = isFriendly;
@@ -31,7 +27,7 @@ namespace Game.Entity
 
         public void Wave()
         {
-            Console.WriteLine("Hey stranger!");
+            Console.WriteLine(GreetingPhrase);
         }
     }
 }
