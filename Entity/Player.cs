@@ -3,33 +3,24 @@ using Game.Interface;
 
 namespace Game.Entity
 {
-    internal class Player : IWorldEntity, IPlayer
+    internal class Player: WorldEntity, IPlayer
     {
         private readonly IWorld _world;
+
         private string information;
 
-        public int Health { get; set; }
-        public Location Location { get; set; }
         public string Name { get; private set; }
 
-        public Player(IWorld world, string name)
+        public Player(IWorld world, string name) : base(world)
         {
             _world = world;
 
             Name = name;
-            Health = 100;
-
-            Random random = new();
-
-            Location = new(
-                random.Next(0, _world.Width),
-                random.Next(0, _world.Height)
-                );
 
             information = $"Player Name: {Name}, Initial Health: {Health}";
         }
 
-        public string GetInformation()
+        public override string GetInformation()
         {
             return information;
         }

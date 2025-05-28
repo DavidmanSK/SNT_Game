@@ -4,7 +4,7 @@ using Game.Interface;
 
 namespace Game.Entity
 {
-    internal class Character : IWorldEntity, ICharacter
+    internal class Character : WorldEntity, ICharacter
     {
         private readonly IWorld _world;
         private string information;
@@ -12,10 +12,8 @@ namespace Game.Entity
         public CharacterType CharacterType { get; private set; }
         public bool IsFriendly { get; private set; }
         public string GreetingPhrase { get; private set; }
-        public int Health { get; set; }
-        public Location Location { get; set; }
 
-        public Character(IWorld world, CharacterType characterType, bool isFriendly, string greetingPhrase)
+        public Character(IWorld world, CharacterType characterType, bool isFriendly, string greetingPhrase) : base(world)
         {
             _world = world;
 
@@ -23,25 +21,17 @@ namespace Game.Entity
             CharacterType = characterType;
             IsFriendly = isFriendly;
             GreetingPhrase = greetingPhrase;
-            Health = 100;
-
-            Random random = new();
-
-            Location = new(
-                random.Next(0, _world.Width),
-                random.Next(0, _world.Height)
-                );
 
         }
 
-        public string GetInformation()
+        public override string GetInformation()
         {
             return information;
         }
 
         public void Wave()
         {
-            //do stuff
+            Console.WriteLine("Hey stranger!");
         }
     }
 }
